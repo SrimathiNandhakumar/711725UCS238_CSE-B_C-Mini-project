@@ -108,7 +108,12 @@ void updateRecord(FILE *fPtr)
     // obtain number of account to update
     printf("%s", "Enter account to update ( 1 - 100 ): ");
     scanf("%d", &account);
-
+    //account number must be between 1 and 100; display error if it is not
+    if (account < 1 || account > 100)
+    {
+        printf("Account number must be between 1 and 100.\n");
+        return;
+    } // end if     
     // move file pointer to correct record in file
     fseek(fPtr, (account - 1) * sizeof(struct clientData), SEEK_SET);
     // read record from file
@@ -131,7 +136,7 @@ void updateRecord(FILE *fPtr)
 
         // move file pointer to correct record in file
         // move back by 1 record length
-        fseek(fPtr, -sizeof(struct clientData), SEEK_CUR);
+        fseek(fPtr, -(long)sizeof(struct clientData), SEEK_CUR);
         // write updated record over old record in file
         fwrite(&client, sizeof(struct clientData), 1, fPtr);
     } // end else
@@ -147,7 +152,12 @@ void deleteRecord(FILE *fPtr)
     // obtain number of account to delete
     printf("%s", "Enter account number to delete ( 1 - 100 ): ");
     scanf("%d", &accountNum);
-
+    //account number must be between 1 and 100; display error if it is not
+    if (accountNum < 1 || accountNum > 100)
+    {
+        printf("Account number must be between 1 and 100.\n");
+        return;
+    } // end if
     // move file pointer to correct record in file
     fseek(fPtr, (accountNum - 1) * sizeof(struct clientData), SEEK_SET);
     // read record from file
@@ -176,6 +186,12 @@ void newRecord(FILE *fPtr)
     // obtain number of account to create
     printf("%s", "Enter new account number ( 1 - 100 ): ");
     scanf("%d", &accountNum);
+    //account number must be between 1 and 100; display error if it is not
+    if (accountNum < 1 || accountNum > 100)
+    {
+        printf("Account number must be between 1 and 100.\n");
+        return;
+    } // end if
 
     // move file pointer to correct record in file
     fseek(fPtr, (accountNum - 1) * sizeof(struct clientData), SEEK_SET);
